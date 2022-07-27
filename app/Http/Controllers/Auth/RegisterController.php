@@ -37,11 +37,11 @@ class RegisterController extends Controller
     {
         if($data['role_as'] == '1') //1 = Admin registration
         {
-            return redirect('dashboard')->with('status','Registered! Welcome to your dashboard');
+            $redirectTo = RouteServiceProvider::DASHBOARD;
         }
         elseif($data['role_as'] == '0') // Normal or Default User registration
         {
-            return redirect('/')->with('status','Registered successfully');
+            $redirectTo = RouteServiceProvider::HOME;
         }
     }
 
