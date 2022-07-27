@@ -33,14 +33,14 @@ class RegisterController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
     // protected $redirectTo = 'login';
-    protected function authenticated(array $data)
+    protected function authenticated()
     {
-        console.log("data" + $data);
-        if($data['role_as'] == '1') //1 = Admin registration
+        console.log("here");
+        if(User::role_as == '1') //1 = Admin registration
         {
             return redirect('dashboard')->with('status','Registered! Welcome to your dashboard');
         }
-        elseif($data['role_as'] == '0') // Normal or Default User registration
+        elseif(User::role_as == '0') // Normal or Default User registration
         {
             return redirect('/')->with('status','Registered successfully');
         }
