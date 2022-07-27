@@ -34,7 +34,7 @@ class RegisterController extends Controller
 
     protected function redirectTo()
     {
-        if (Auth::user()->role_as == '1') {
+        if (auth()->user()->role_as == '1') {
             return '/dashboard';
         }
         return '/';
