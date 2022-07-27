@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class RegisterController extends Controller
 {
@@ -35,12 +34,11 @@ class RegisterController extends Controller
     // protected $redirectTo = 'login';
     protected function authenticated()
     {
-        console.log("here");
-        if(User::role_as == '1') //1 = Admin registration
+        if(Auth::user()->role_as == '1') //1 = Admin 
         {
-            return redirect('dashboard')->with('status','Registered! Welcome to your dashboard');
+            return redirect('dashboard')->with('status','Welcome to your dashboard');
         }
-        elseif(User::role_as == '0') // Normal or Default User registration
+        elseif(Auth::user()->role_as == '0') // Normal or Default User 
         {
             return redirect('/')->with('status','Registered successfully');
         }
