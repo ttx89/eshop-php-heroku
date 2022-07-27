@@ -8,10 +8,11 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
-// to overwrite auto login after registration
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
+// // to overwrite auto login after registration
+// use Illuminate\Http\Request;
+// use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -33,24 +34,30 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
     // protected $redirectTo = 'login';
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
+    protected function redirectTo()
     {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+        if (Auth::user()->role_as == '1') {
+            return '/dashboard';
+        }
+        return '/';
     }
+    // /**
+    //  * Handle a registration request for the application.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function register(Request $request)
+    // {
+    //     $this->validator($request->all())->validate();
+
+    //     event(new Registered($user = $this->create($request->all())));
+
+    //     return $this->registered($request, $user)
+    //         ?: redirect($this->redirectPath());
+    // }
     
     /**
      * Create a new controller instance.
