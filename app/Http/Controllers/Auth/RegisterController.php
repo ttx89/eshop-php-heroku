@@ -29,7 +29,20 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function authenticated()
+    {
+        if(Auth::user()->role_as == '1') //1 = Admin Registration
+        {
+            return redirect('dashboard')->with('status','Registered successfully! Welcome to your dashboard');
+        }
+        elseif(Auth::user()->role_as == '0') // Normal or Default User Registration
+        {
+            return redirect('/')->with('status','Registered successfully');
+        }
+    }
+
 
     /**
      * Create a new controller instance.
