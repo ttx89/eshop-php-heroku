@@ -29,8 +29,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = 'login';
+    protected $redirectTo = RouteServiceProvider::LOGOUT;
+    // protected $redirectTo = 'login';
 
 
     
@@ -41,7 +41,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
     /**
